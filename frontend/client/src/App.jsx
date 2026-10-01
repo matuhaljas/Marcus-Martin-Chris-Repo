@@ -36,7 +36,7 @@ function App() {
   }, []);
 
   function handleAdd(text) {
-    const newTask = { id: nextId.current++, text, completed: false };
+    const newTask = { id: nextId.current++, text};
     setWorkout(prev => [...prev, newTask]);
   }
 
@@ -44,9 +44,9 @@ function App() {
     setWorkout(prev => prev.filter(task => task.id !== id));
   }
 
-  const filteredTasks = workout.filter(task => {
-    if (filter === 'completed') return task.completed;
-    if (filter === 'incomplete') return !task.completed;
+  const filteredWorkout = workout.filter(task => {
+    if (filter === 'pullup') return task.pullup;
+    if (filter === 'pushup') return !task.pushup;
     return true;
   });
 
@@ -58,7 +58,7 @@ function App() {
           path="/"
           element={
             <div>
-              <h1>Tasks</h1>
+              <h1>Workouts</h1>
               {error && <p>{error}</p>}
               <WorkoutForm onAdd={handleAdd} />
 
@@ -70,24 +70,24 @@ function App() {
                   All
                 </button>
                 <button
-                  onClick={() => setFilter("completed")}
-                  disabled={filter === "completed"}
+                  onClick={() => setFilter("pullup")}
+                  disabled={filter === "pullup"}
                 >
-                  Completed
+                  Pull-up
                 </button>
                 <button
-                  onClick={() => setFilter("incomplete")}
-                  disabled={filter === "incomplete"}
+                  onClick={() => setFilter("pushup")}
+                  disabled={filter === "pushup"}
                 >
-                  Incomplete
+                  Push-up
                 </button>
               </div>
 
               {loading ? (
-                <p>Loading tasks...</p>
+                <p>Loading workouts...</p>
               ) : (
                 <WorkoutList
-                  tasks={filteredTasks}
+                  workouts={filteredWorkout}
                   onDelete={handleDelete}
                 />
               )}
