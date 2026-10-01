@@ -55,6 +55,32 @@ app.post('/api/items', async (req, res) => {
   res.status(201).json(data);
 });
 
+// kirje kustutamine
+app.delete('/api/items/:id', async (req, res) => {
+  const id = Number(req.params.id);
+
+  // id peab olema positiivne täisarv
+  if (!Number.isInteger(id) || id < 1) {
+    return res.status(404).json({ error: 'Kirjet ei leitud' });
+  }
+
+  // kustutame ainult oma kirje
+  const { data, error } = await req.db
+    .from('exercises')
+    .delete()
+    .eq('id', id)
+    .eq('owner_id', req.user.id)
+    .select();
+  if (error) throw error;
+
+  // midagi ei kustunud
+  if (data.length === 0) {
+    return res.status(404).json({ error: 'Kirjet ei leitud' });
+  }
+
+  res.status(204).end();
+});
+
 // tundmatu aadress
 app.use((req, res) => {
   res.status(404).json({ error: 'Ei leitud' });
