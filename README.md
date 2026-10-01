@@ -14,3 +14,7 @@ Small extra: Search by exercise name.
 Demo: Show only records matching one exercise.
 
 rakenduseprogremine
+
+API:
+https://itmbeshymhyggdcpyjcz.supabase.co/rest/v1/
+pw rakenduseprogremine
