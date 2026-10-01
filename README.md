@@ -22,3 +22,7 @@ pw rakenduseprogremine
 
 NEXT_PUBLIC_SUPABASE_URL=https://itmbeshymhyggdcpyjcz.supabase.co
 NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=sb_publishable_BoetRCrSuuOAeVY1Xyp5Qw_a9a2Ji_n
+
+
+
+https://docs.google.com/presentation/d/11hz3GwRpVrL_zd_i3MjYbVydCP6ZLNA1wr-BxjLz_6Q/edit?usp=sharing
