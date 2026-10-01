@@ -32,6 +32,29 @@ app.get('/api/items', async (req, res) => {
   res.status(200).json(data);
 });
 
+// uus kirje
+app.post('/api/items', async (req, res) => {
+  const { exercise, reps } = req.body || {};
+
+  // kontrollime andmeid
+  if (typeof exercise !== 'string' || exercise.trim().length < 1 || exercise.trim().length > 60) {
+    return res.status(400).json({ error: 'Harjutus peab olema 1-60 märki' });
+  }
+  if (!Number.isInteger(reps) || reps < 1 || reps > 500) {
+    return res.status(400).json({ error: 'Kordused peavad olema täisarv 1-500' });
+  }
+
+  // owner_id tuleb tokenist, mitte brauserist
+  const { data, error } = await req.db
+    .from('exercises')
+    .insert({ exercise: exercise.trim(), reps, owner_id: req.user.id })
+    .select()
+    .single();
+  if (error) throw error;
+
+  res.status(201).json(data);
+});
+
 // tundmatu aadress
 app.use((req, res) => {
   res.status(404).json({ error: 'Ei leitud' });
@@ -39,6 +62,10 @@ app.use((req, res) => {
 
 // kui midagi läheb katki
 app.use((err, req, res, next) => {
+  // katkine JSON brauserist
+  if (err.type === 'entity.parse.failed') {
+    return res.status(400).json({ error: 'Vigane JSON' });
+  }
   console.error(err);
   res.status(500).json({ error: 'Serveri viga' });
 });
