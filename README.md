@@ -18,3 +18,7 @@ rakenduseprogremine
 API:
 https://itmbeshymhyggdcpyjcz.supabase.co/rest/v1/
 pw rakenduseprogremine
+
+
+NEXT_PUBLIC_SUPABASE_URL=https://itmbeshymhyggdcpyjcz.supabase.co
+NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=sb_publishable_BoetRCrSuuOAeVY1Xyp5Qw_a9a2Ji_n
