@@ -7,8 +7,8 @@ export default function WorkoutList({ workout, onDelete }) {
 
   return (
     <ul>
-      {workout.map(task => (
-        <WorkoutCard key={task.id} task={task} onDelete={onDelete} />
+      {workout.map(item => (
+        <WorkoutCard key={item.id} workout={item} onDelete={onDelete} />
       ))}
     </ul>
   );
